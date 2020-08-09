@@ -10,39 +10,99 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const teamMembers = [];
 
-getManager = function(){
-inquirer.prompt ([
-{
-    type: 'input',
-    name: 'name',
-    message: 'What is your name?',  
+getManager = function () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the managers name?',
 
-},
-{
-    type: 'input',
-    name: 'id',
-    message: 'What is your id?',
-},
-{
-    type: 'input',
-    name: 'email',
-    message: 'What is your email?', 
-}, 
-{
-    type: 'input',
-    name: 'officenumber',
-    message: 'What is your office number?',
-}   
-])
-    .then((answers) =>{
-        const manager = new Manager(answers.name, answers.id, answers.email, answers.officenumber)
-        teamMembers.push(manager)
-        pickTeam();
-    })
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is the managers ID?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is the managers email?',
+        },
+        {
+            type: 'input',
+            name: 'officenumber',
+            message: 'What is the managers office number?',
+        }
+    ])
+        .then((answers) => {
+            const manager = new Manager(answers.name, answers.id, answers.email, answers.officenumber)
+            teamMembers.push(manager)
+            pickTeam();
+        })
+}
+getEngineer = function () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the engineers name?',
+
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is the engineers id?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is the engineers email?',
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is engineers GitHub username?',
+        }
+    ])
+        .then((answers) => {
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
+            teamMembers.push(engineer)
+            pickTeam();
+        })
+}
+getIntern = function () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the interns name?',
+
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is the interns id?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is the interns email?',
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What is the interns school?',
+        }
+    ])
+        .then((answers) => {
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
+            teamMembers.push(intern)
+            pickTeam();
+        })
 }
 
-pickTeam = function() {
-    inquirer.prompt ([
+pickTeam = function () {
+    inquirer.prompt([
         {
             type: 'list',
             name: 'team',
@@ -52,24 +112,26 @@ pickTeam = function() {
         // if(choice.team === Engineer){
         //     getEngineer();
         // }
-       
+
     ])
-    .then((choice) =>{
-        switch(choice.team){
-            case "Engineer": 
-            getEngineer();
-            case "Intern":
-            getIntern();
-            default:
-            buildHtml();
-        }
-    })
+        .then((choice) => {
+            switch (choice.team) {
+                case "Engineer":
+                    getEngineer();
+                    break;
+                case "Intern":
+                    getIntern();
+                    break;
+                default:
+                    buildHtml();
+            }
+        })
 }
 
-buildHtml = function(){
-if(!fs.existsSync(OUTPUT_DIR)){
-    fs.mkdirSync(OUTPUT_DIR)
-}
-fs.writeFileSync(outputPath, template(teamMembers), 'utf-8')
+buildHtml = function () {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR)
+    }
+    fs.writeFileSync(outputPath, template(teamMembers), 'utf-8')
 }
 getManager();
