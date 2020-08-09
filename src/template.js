@@ -44,7 +44,7 @@ generate = function (teamMembers) {
                     ${engineer.getEmail()}
                 </li>
                 <li>
-                    ${engineer.getGitHub()}
+                  github.com/${engineer.getGitHub()}
                 </li>
             </ul>
         </div>
