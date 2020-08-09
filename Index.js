@@ -16,12 +16,28 @@ getManager = function () {
             type: 'input',
             name: 'name',
             message: 'What is the managers name?',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a name.');
+                    return false;
+                }
+            }
 
         },
         {
             type: 'input',
             name: 'id',
             message: 'What is the managers ID?',
+            validate: idInput => {
+                if (idInput) {
+                    return true;
+                } else {
+                    console.log('Please enter an ID.');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
@@ -46,12 +62,20 @@ getEngineer = function () {
             type: 'input',
             name: 'name',
             message: 'What is the engineers name?',
+            validate: engineerName => {
+                if (engineerName) {
+                    return true;
+                } else {
+                    console.log('Please enter a name.')
+                    return false;
+                }
+            }
 
         },
         {
             type: 'input',
             name: 'id',
-            message: 'What is the engineers id?',
+            message: 'What is the engineers ID?',
         },
         {
             type: 'input',
@@ -76,12 +100,20 @@ getIntern = function () {
             type: 'input',
             name: 'name',
             message: 'What is the interns name?',
+            validate: internName => {
+                if (internName) {
+                    return true;
+                } else {
+                    console.log('Please enter a name')
+                    return false;
+                }
+            }
 
         },
         {
             type: 'input',
             name: 'id',
-            message: 'What is the interns id?',
+            message: 'What is the interns ID?',
         },
         {
             type: 'input',
